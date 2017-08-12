@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'gems'
+require 'thor'
+
+class Praise < Thor
+  desc 'list', 'Show all gems'
+  def list
+    gems = File.read('Gemfile')
+      .split("\n")
+      .map do |line|
+        match_data = /^\s*gem (['"])(.*?)(['"])/.match(line)
+        if match_data
+          match_data[2]
+        end
+      end
+      .compact
+
+    say Hash[gems.take(10).map { |gem| [gem, Gems.info(gem)['source_code_uri']] }]
+  end
+end
+
+Praise.start(ARGV)
