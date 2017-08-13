@@ -1,4 +1,5 @@
 # Praise
+[![Build Status](https://travis-ci.org/donjar/praise.svg?branch=master)](https://travis-ci.org/donjar/praise)
 
 ## Installation
 
