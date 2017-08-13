@@ -2,9 +2,11 @@ require 'thor'
 require 'gems'
 
 module Praise
+  ##
+  # This is the CLI
   class Runner < Thor
     desc 'list', 'Show all gems'
-    def list
+    def list(gems = current_gems)
       kv_pair = gems.map do |gem|
         info = Gems.info(gem)
         github_uri = info['source_code_uri'] || info['homepage_uri']
@@ -16,7 +18,7 @@ module Praise
 
     private
 
-    def gems
+    def current_gems
       File
         .read('Gemfile')
         .split("\n")
